@@ -1,0 +1,326 @@
+@import "tailwindcss";
+
+@theme {
+  /* Futuristic Space Theme Palette */
+  --color-midnight: #070b18;          /* Deep Space Background */
+  --color-navy: #111c32;              /* Midnight Navy */
+  --color-navy-light: #16243f;
+  --color-navy-lighter: #1e2e4e;
+  --color-surface: #17243b;           /* Elevated Surface */
+  --color-surface-light: #1e2d4a;
+  --color-surface-lighter: #253757;
+  --color-border: #1f2e4a;
+  --color-border-light: #2a3e62;
+  --color-border-bright: #3b537f;
+
+  /* Scientific Instrument & Space Accents */
+  --color-mint: #00e5b0;              /* Electric Mint (VIIRS Accent) */
+  --color-mint-dim: rgba(0, 229, 176, 0.18);
+  --color-cyan: #00b8d9;              /* Satellite Cyan */
+  --color-cyan-dim: rgba(0, 184, 217, 0.18);
+  --color-electric: #00e5b0;
+  --color-electric-dim: rgba(0, 229, 176, 0.18);
+  --color-fire: #ff713e;              /* Solar Orange (MODIS Accent) */
+  --color-fire-bright: #ff8a5b;
+  --color-fire-dim: rgba(255, 113, 62, 0.18);
+  --color-solar: #ff713e;
+  --color-violet: #a78bfa;            /* Aurora Violet */
+  --color-violet-dim: rgba(167, 139, 250, 0.18);
+  --color-aurora: #a78bfa;
+
+  /* Status Colors */
+  --color-danger: #ef4444;
+  --color-danger-dim: rgba(239, 68, 68, 0.18);
+  --color-warning: #f59e0b;
+  --color-warning-dim: rgba(245, 158, 11, 0.18);
+  --color-success: #00e5b0;
+
+  /* Typography */
+  --color-text-primary: #f1f5ff;      /* Primary Text */
+  --color-text-secondary: #94a3b8;    /* Secondary Text */
+  --color-text-muted: #64748b;
+
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-light) transparent;
+  }
+
+  body {
+    background-color: var(--color-midnight);
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(0, 184, 217, 0.35);
+    color: #f1f5ff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-light);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-cyan);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Component Design Tokens (Native CSS for 100% Tailwind v4 Reliability)
+   ───────────────────────────────────────────────────────────── */
+
+/* Cards */
+.card {
+  background-color: rgba(23, 36, 59, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(31, 46, 74, 0.85);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.card-hover {
+  background-color: rgba(23, 36, 59, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(31, 46, 74, 0.85);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  border-color: rgba(0, 184, 217, 0.5);
+  background-color: rgba(30, 45, 74, 0.95);
+  box-shadow: 0 15px 30px -5px rgba(0, 184, 217, 0.15), 0 10px 15px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Glassmorphism */
+.glass {
+  background-color: rgba(17, 28, 50, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(31, 46, 74, 0.8);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.glass-panel {
+  background-color: rgba(23, 36, 59, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(31, 46, 74, 0.75);
+  border-radius: 0.75rem;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, #00b8d9 0%, #00ccb0 50%, #00e5b0 100%);
+  color: #070b18;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 16px rgba(0, 229, 176, 0.25);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 24px rgba(0, 229, 176, 0.45);
+}
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid #2a3e62;
+  background-color: rgba(17, 28, 50, 0.7);
+  color: #f1f5ff;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  background-color: #1e2d4a;
+  border-color: rgba(0, 184, 217, 0.5);
+  color: #f1f5ff;
+}
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: #94a3b8;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  color: #f1f5ff;
+  background-color: rgba(30, 45, 74, 0.6);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+.badge-cyan {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background-color: rgba(0, 184, 217, 0.18);
+  color: #00b8d9;
+  border: 1px solid rgba(0, 184, 217, 0.35);
+}
+.badge-mint {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background-color: rgba(0, 229, 176, 0.18);
+  color: #00e5b0;
+  border: 1px solid rgba(0, 229, 176, 0.35);
+}
+.badge-fire {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background-color: rgba(255, 113, 62, 0.18);
+  color: #ff713e;
+  border: 1px solid rgba(255, 113, 62, 0.35);
+}
+.badge-violet {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background-color: rgba(167, 139, 250, 0.18);
+  color: #a78bfa;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+}
+.badge-danger {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background-color: rgba(239, 68, 68, 0.18);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+/* Input Fields */
+.input-field {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(17, 28, 50, 0.9);
+  border: 1px solid #1f2e4a;
+  border-radius: 0.5rem;
+  color: #f1f5ff;
+  transition: all 0.2s ease;
+  outline: none;
+}
+.input-field::placeholder {
+  color: #64748b;
+}
+.input-field:focus {
+  border-color: rgba(0, 184, 217, 0.6);
+  box-shadow: 0 0 0 2px rgba(0, 184, 217, 0.2);
+}
+
+/* Typography & Titles */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f1f5ff;
+  letter-spacing: -0.025em;
+}
+.label-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+.stat-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+/* Futuristic Cosmic Glows */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 184, 217, 0.3);
+}
+.glow-mint {
+  box-shadow: 0 0 20px rgba(0, 229, 176, 0.3);
+}
+.glow-fire {
+  box-shadow: 0 0 20px rgba(255, 113, 62, 0.3);
+}
+.glow-violet {
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
+}
